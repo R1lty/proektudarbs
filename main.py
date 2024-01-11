@@ -83,6 +83,7 @@ find.send_keys(car.carTransmission)
 car_model = driver.find_element(By.CLASS_NAME, "amopt")
 car_model = car_model.get_attribute("amopt")
 print(car_model)
+print()
 
 
 

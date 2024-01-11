@@ -49,6 +49,7 @@ while (True):
 
 #------------------------------------ SEARCHING -------------------------------------------------------------------------
 
+
 service = Service()
 option = webdriver.ChromeOptions()
 driver = webdriver.Chrome(service=service, options=option)
@@ -74,3 +75,20 @@ find.send_keys(car.carEngine)
 #TRANSMISSION
 find = driver.find_element(By.ID, "f_o_35")
 find.send_keys(car.carTransmission)
+
+
+#------------------------------------ READING -------------------------------------------------------------------------
+
+
+car_model = driver.find_element(By.CLASS_NAME,'amopt')
+print(car_model)
+
+
+
+
+
+
+
+
+
+driver.quit()

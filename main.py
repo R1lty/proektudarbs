@@ -9,15 +9,12 @@ from classes import *
 
 car = Car()
 
-# service = Service()
-# option = webdriver.ChromeOptions()
-# driver = webdriver.Chrome(service=service, options=option)
 
-#------------------------------------WELCOME MESSAGE-------------------------------------------------------------------------
+#------------------------------------ WELCOME MESSAGE -------------------------------------------------------------------------
 
 car.write_welcome_message()
 
-#------------------------------------DATA CHEACKING-------------------------------------------------------------------------
+#------------------------------------ DATA CHEACKING -------------------------------------------------------------------------
 
 
 while (True):
@@ -39,12 +36,41 @@ while (True):
 
 
 while (True):
-    carTransmission = input("What kind of transmission do you want in your car 'manual/automatic ' (Transmission): ")
+    carTransmission = input("What kind of transmission do you want in your car 'manual/automatic ' (Transmission): ").lower()
     if car.check_transmission(carTransmission):
-        car.carTransmission = carTransmission
+        if carTransmission == "manual":
+            car.carTransmission = "Manuāla"
+        elif carTransmission == "automatic":
+            car.carTransmission = "Automāts"
         break
     else:
         print("We can't find a transmission of this type, either manual or automatic")
 
 
-#------------------------------------DATA CHEACKING-------------------------------------------------------------------------
+#------------------------------------ SEARCHING -------------------------------------------------------------------------
+
+service = Service()
+option = webdriver.ChromeOptions()
+driver = webdriver.Chrome(service=service, options=option)
+
+url = "https://www.ss.lv/lv/transport/cars/"
+driver.get(url)
+time.sleep(2)
+
+#YEAR
+find = driver.find_element(By.ID, "f_o_18_min")
+find.send_keys(car.yearOfCar)
+
+find = driver.find_element(By.ID, "f_o_18_max")
+find.send_keys(car.yearOfCar)
+
+#ENGINE
+find = driver.find_element(By.ID, "f_o_15_min")
+find.send_keys(car.carEngine)
+
+find = driver.find_element(By.ID, "f_o_15_max")
+find.send_keys(car.carEngine)
+
+#TRANSMISSION
+find = driver.find_element(By.ID, "f_o_35")
+find.send_keys(car.carTransmission)

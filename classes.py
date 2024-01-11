@@ -1,7 +1,7 @@
 
 class Car:
     
-    
+
     def write_welcome_message(self):
         print("""
             Welcome to the application for finding a suitable car. 
@@ -15,4 +15,4 @@ class Car:
         return True if 0.6 <= engineOfCar <= 7.3 else False
     
     def check_transmission(self,carTransmission):
-        return True if carTransmission==("manual" or "automatic") else False
+        return True if carTransmission =="manual" or carTransmission == "automatic" else False

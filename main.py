@@ -97,13 +97,11 @@ car_model_elements = driver.find_elements(By.XPATH, '//tr[starts-with(@id, "tr_5
 if not car_model_elements:
     print("Nav mašinas")
 else:
-    # Создаем новую книгу Excel и лист
     workbook = openpyxl.Workbook()
     sheet = workbook.active
 
-    # Записываем значения в первый ряд
     sheet.append(first_row_values)
-    # Список для хранения данных для каждого столбца
+   
     columns_data = []
 
     for car_model_element in car_model_elements:
@@ -111,25 +109,24 @@ else:
             nested_elements = car_model_element.find_elements(By.CLASS_NAME, "amopt")
             car_model_text = "?".join([nested_element.text.replace('\n', ' ') for nested_element in nested_elements])
 
-            # Добавляем каждую строку в соответствующий столбец в списке
             lines = car_model_text.split('?')
             for i, line in enumerate(lines):
                 if len(columns_data) <= i:
                     columns_data.append([])
-                # Используем индексацию строк начиная с 2
                 columns_data[i].append(line)
 
         except Exception as e:
             print(f"Error: {e}")
 
-    # Добавляем данные из списка в столбцы на листе Excel, начиная со второй строки
+    
     for i, column_data in enumerate(columns_data):
         for j, value in enumerate(column_data):
             sheet.cell(row=j+2, column=i+1, value=value)
 
-    # Сохраняем книгу Excel
+    
     workbook.save(file_name)
     print("Visi dati ir nolasiti")
+    print("Jūsu dati atrodas failā carlist.xlxs")
 
 
 

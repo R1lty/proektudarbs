@@ -1,10 +1,14 @@
-import selenium
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-import time
-import pandas
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 
+
+import time
+#import pandas
 from classes import *
 
 car = Car()
@@ -49,11 +53,9 @@ while (True):
 
 #------------------------------------ SEARCHING -------------------------------------------------------------------------
 
-
 service = Service()
 option = webdriver.ChromeOptions()
-driver = webdriver.Chrome(service=service, options=option)
-
+driver = webdriver.Chrome()
 url = "https://www.ss.lv/lv/transport/cars/"
 driver.get(url)
 time.sleep(2)
@@ -61,36 +63,53 @@ time.sleep(2)
 #YEAR
 find = driver.find_element(By.ID, "f_o_18_min")
 find.send_keys(car.yearOfCar)
+time.sleep(0.5)
 
 find = driver.find_element(By.ID, "f_o_18_max")
 find.send_keys(car.yearOfCar)
+time.sleep(0.5)
 
 #ENGINE
 find = driver.find_element(By.ID, "f_o_15_min")
 find.send_keys(car.carEngine)
-
+time.sleep(0.5)
 find = driver.find_element(By.ID, "f_o_15_max")
 find.send_keys(car.carEngine)
-
+time.sleep(0.5)
 #TRANSMISSION
 find = driver.find_element(By.ID, "f_o_35")
 find.send_keys(car.carTransmission)
+time.sleep(0.5)
+
+
 
 
 #------------------------------------ READING -------------------------------------------------------------------------
 
+car_model_elements = driver.find_elements(By.XPATH, '//tr[starts-with(@id, "tr_5")]')
 
-car_model = driver.find_element(By.CLASS_NAME, "amopt")
-car_model = car_model.get_attribute("amopt")
-print(car_model)
+if not car_model_elements:
+    print("Nav mašinas")
+else:
+    with open('carlist.txt', 'w', encoding='utf-8'):
+        pass
 
+    
+    with open('carlist.txt', 'a', encoding='utf-8') as file:
+        for car_model_element in car_model_elements:
+            try:
+                nested_elements = car_model_element.find_elements(By.CLASS_NAME, "amopt")
+                car_model_text = " ".join([nested_element.text.replace('\n', ' ') for nested_element in nested_elements])
+                car_model_text = car_model_text.replace('€ maniņai', '\n')
+                file.write(car_model_text + '\n')
+            
+                
+            except Exception as e:
+                print(f"Error: {e}")
+                
+   
+        print("Visi dati ir nolasiti")
+   
+        
 
-
-
-
-
-
-
-
-
-driver.quit()
+    driver.quit()

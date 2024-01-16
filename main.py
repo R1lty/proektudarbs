@@ -7,6 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 import os
 import time
+import pandas 
+from tabulate import tabulate
 
 # import pandas
 from classes import *
@@ -142,5 +144,33 @@ else:
 
     print("Visi dati ir nolasiti")
     print("Jūsu dati atrodas failā carlist.xlxs")
+
+
+# ------------------------------------ USER PROMTS-------------------------------------------------------------------------
+    
+    
+    car.command_instruction()
+
+    user_promt = input("Select a command : ")
+
+    if user_promt == "minpr":
+
+        sorted_car_list = sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0')))
+
+        headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
+        table_data = list(zip(headers, sorted_car_list[0]))
+        table = tabulate(table_data, headers="firstrow", tablefmt="grid")
+
+        print(table)
+    
+    elif user_promt == "maxpr":
+        
+        sorted_car_list= sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0')), reverse=True)
+
+        headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
+        table_data = list(zip(headers, sorted_car_list[0]))
+        table = tabulate(table_data, headers="firstrow", tablefmt="grid")
+
+        print(table)
 
     driver.quit()

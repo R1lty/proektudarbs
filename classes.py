@@ -1,6 +1,6 @@
 
 class Car:
-    
+
 
     def write_welcome_message(self):
         print("""
@@ -16,3 +16,32 @@ class Car:
     
     def check_transmission(self,carTransmission):
         return True if carTransmission =="manual" or carTransmission == "automatic" else False
+    
+    def command_instruction(self):
+        
+        import time 
+        
+        print("\n\tSelect a command to search for a suitable car")
+
+        time.sleep(2)
+    
+        print('''
+          minpr - the cheapest car from the excel list
+          maxpr - most expensive car from the excel list
+          lowmil - car with the lowest mileage
+          maxmil - car with the highest mileage
+          (Toyota,Volkswagen,Lexus,etc.) -  all cars this brand from the excel file will be displayed in the console
+          exit - command that stops the program 
+          ''') 
+
+    def read_excel(self):
+
+        import pandas 
+
+        excel_file_data = pandas.read_excel("carlist.xlsx")
+        excel_info_list = excel_file_data.values.tolist()
+
+        return  excel_info_list
+    
+
+         

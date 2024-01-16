@@ -138,7 +138,7 @@ else:
 
     workbook.save(file_name)
 
-
+    driver.quit()
 # ------------------------------------ PRINTING THE RESULT-------------------------------------------------------------------------
 
 
@@ -150,27 +150,30 @@ else:
     
     
     car.command_instruction()
-
-    user_promt = input("Select a command : ")
-
-    if user_promt == "minpr":
-
-        sorted_car_list = sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0')))
-
-        headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
-        table_data = list(zip(headers, sorted_car_list[0]))
-        table = tabulate(table_data, headers="firstrow", tablefmt="grid")
-
-        print(table)
     
-    elif user_promt == "maxpr":
+
+    while True: 
+        user_promt = input("Select a command : ")
+
+        if user_promt == "minpr":
+
+            sorted_car_list = sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0')))
+
+            headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
+            table_data = list(zip(headers, sorted_car_list[0]))
+            table = tabulate(table_data, headers="firstrow", tablefmt="grid")
+
+            print(table)
         
-        sorted_car_list= sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0')), reverse=True)
+        elif user_promt == "maxpr":
+            
+            sorted_car_list= sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0')), reverse=True)
 
-        headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
-        table_data = list(zip(headers, sorted_car_list[0]))
-        table = tabulate(table_data, headers="firstrow", tablefmt="grid")
+            headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
+            table_data = list(zip(headers, sorted_car_list[0]))
+            table = tabulate(table_data, headers="firstrow", tablefmt="grid")
 
-        print(table)
+            print(table)
 
-    driver.quit()
+        elif user_promt == "exit":
+            break

@@ -38,7 +38,19 @@ The Car Finder Application is designed to help users find a suitable car based o
 <h3>User Commands</h3>
 <h4>The user is presented with a set of commands to interact with the application. The available commands include:
 
--_minpr_: Displays the cheapest cars from the Excel list. -_maxpr_: Displays the most expensive cars from the Excel list. -_lowmil_: Displays cars with the lowest mileage. -_maxmil_: Displays cars with the highest mileage. -_findmark_: Allows the user to find cars by a specific brand or keyword. -_help_: Displays the list of commands. -_exit_: Stops the program.</h4>
+-_minpr_: Displays the cheapest cars from the Excel list.
+
+-_maxpr_: Displays the most expensive cars from the Excel list.
+
+-_lowmil_: Displays cars with the lowest mileage.
+
+-_maxmil_: Displays cars with the highest mileage.
+
+-_findmark_: Allows the user to find cars by a specific brand or keyword.
+
+-_help_: Displays the list of commands. -_exit_: Stops the program.
+
+</h4>
 <br>
 
 <h3>Additional Notes</h3>

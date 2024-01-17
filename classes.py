@@ -30,7 +30,7 @@ class Car:
           maxpr - most expensive car from the excel list
           lowmil - car with the lowest mileage
           maxmil - car with the highest mileage
-          (Toyota,Volkswagen,Lexus,etc.) -  all cars this brand from the excel file will be displayed in the console
+          findmark -  all cars this brand from the excel file will be displayed in the console after writing the model of the car
           exit - command that stops the program 
           ''') 
 

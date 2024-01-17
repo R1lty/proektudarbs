@@ -153,11 +153,11 @@ else:
     
 
     while True: 
-        user_promt = input("Select a command : ")
+        user_prompt = input("Select a command : ")
 
-        if user_promt == "minpr":
+        if user_prompt == "minpr":
 
-            sorted_car_list = sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0')))
+            sorted_car_list = sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0').replace('maiņai','')))
 
             headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
             table_data = list(zip(headers, sorted_car_list[0]))
@@ -165,9 +165,9 @@ else:
 
             print(table)
         
-        elif user_promt == "maxpr":
+        elif user_prompt == "maxpr":
             
-            sorted_car_list= sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0')), reverse=True)
+            sorted_car_list= sorted(car.read_excel(), key=lambda x: float(x[4].replace(' €', '').replace(',', '').replace('-', '0').replace('maiņai','')), reverse=True)
 
             headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
             table_data = list(zip(headers, sorted_car_list[0]))
@@ -175,5 +175,46 @@ else:
 
             print(table)
 
-        elif user_promt == "exit":
+        elif user_prompt == "lowmil":
+            
+            sorted_car_list = sorted(car.read_excel(), key=lambda x: float(x[3].replace(' tūkst.', '').replace('-', "500000")))
+
+            headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
+            table_data = list(zip(headers, sorted_car_list[0]))
+            table = tabulate(table_data, headers="firstrow", tablefmt="grid")
+
+            print(table)
+
+        elif user_prompt == "maxmil":
+
+            sorted_car_list = sorted(car.read_excel(), key=lambda x: float(x[3].replace(' tūkst.', '').replace('-', "0")),reverse=True)
+
+            headers = ["Model", "Year", "Capacity", "Mileage", "Price"]
+            table_data = list(zip(headers, sorted_car_list[0]))
+            table = tabulate(table_data, headers="firstrow", tablefmt="grid")
+
+            print(table)
+
+        elif user_prompt == "exit":
             break
+        
+        elif user_prompt == "findmark":
+            user_prompt = input("Write the mark you want to find : ").capitalize()
+            check = False
+            car_info_list = car.read_excel()
+            print("")
+            for car_info in car_info_list:
+                # if user_prompt in car_info[0]:
+                #     check = True
+                #     print(f"{car_info[0]} {car_info[1]} {car_info[2]} {car_info[3]} {car_info[4]}")
+
+                if all(word in car_info[0].split() for word in user_prompt.split()):
+                    print(f"{car_info[0]} {car_info[1]} {car_info[2]} {car_info[3]} {car_info[4]}")
+
+            if check == False:
+
+                print("There are no such mark")    
+                
+
+        else: 
+            print("Unknown command")

@@ -14,11 +14,17 @@ The Car Finder Application is designed to help users find a suitable car based o
 <h3>Libraries</h3>
 <h4>
 -openpyxl
+
 -selenium
+
 -os
+
 -time
+
 -pandas
+
 -tabulate
+
 </h4>
 
 <br>

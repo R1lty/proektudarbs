@@ -37,6 +37,7 @@ The Car Finder Application is designed to help users find a suitable car based o
 <br>
 <h3>User Commands</h3>
 <h4>The user is presented with a set of commands to interact with the application. The available commands include:
+<br>
 
 -_minpr_: Displays the cheapest cars from the Excel list.
 

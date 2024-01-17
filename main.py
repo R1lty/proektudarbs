@@ -204,17 +204,16 @@ else:
             car_info_list = car.read_excel()
             print("")
             for car_info in car_info_list:
-                # if user_prompt in car_info[0]:
-                #     check = True
-                #     print(f"{car_info[0]} {car_info[1]} {car_info[2]} {car_info[3]} {car_info[4]}")
-
-                if all(word in car_info[0].split() for word in user_prompt.split()):
+                if user_prompt in car_info[0] or all(word in car_info[0] for word in user_prompt.split()):
+                    check = True
                     print(f"{car_info[0]} {car_info[1]} {car_info[2]} {car_info[3]} {car_info[4]}")
 
             if check == False:
 
                 print("There are no such mark")    
                 
+        elif user_prompt == "help":
+            car.command_instruction()
 
         else: 
             print("Unknown command")

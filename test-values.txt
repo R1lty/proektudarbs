@@ -1,3 +1,0 @@
-Gads : 1963
-Engine : 2.4
-Transmission : manual
